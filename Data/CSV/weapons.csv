@@ -1,0 +1,5 @@
+weapons/,,,,,,,,
+name,parent,custom,damage:float,cost:int,icon,base durability,penetration:float,speed:float
+basesword,,,10,10,$path,100,1,1
+basefists,,,1,0,$path,-1,0,1
+oldsword,basesword,,5,1,$path,50,0.2,0.5
