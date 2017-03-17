@@ -1,7 +1,7 @@
 # Unity3d-CSVDatabase
 Super simple database feeding from CSV files for unity engine.
 
-Allows you to have data in CSV file scanned and turned into CSVObject holding all that data as a dictionary of string + object (name + value).
+Allows you to have data in CSV files scanned and turned into CSVObject holding all that data as a dictionary of string + object (name + value).
 
 Current features:
 * Inheritance (depth of 1000 is the default limit)
@@ -13,6 +13,7 @@ Current features:
 Future features:
 * custom data injection (like FBX parameter array)
 * hot reload
+* queries (by path, by name, by attribute...)
 
 # How it works
 It scans a folder for CSV files, then parses them based on rules.
@@ -41,8 +42,48 @@ By default the database will look in "Data/CSV" folder for .csv files, that is h
   * column A - Name : object name, or id, used to identify object and should be unique.
   * column B - Parent : put other object's name - local if within the same file, or full path if in other file (armor/dragon_helmet)
   * column C - Custom : reserved for future use, you will have a long line of arbitrary key:value separated by ';' unique for each object, just in case you need to shove a bunch of unique additionional data for whatever uses 
-  
-# Viewier
+
+* Inheritance - you can inherit any other object, that shares similar fields (not necessary tho, but will throw an error to notify you). You can inherit an object that inherits another object. Any field left empty in the csv will be inherited.
+ 
+
+# Code
+
+```csharp
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TestScript : MonoBehaviour {
+
+    public string databaseID = "weapons/oldsword";
+    public string Name;
+    public int Cost;
+    public float Damage;
+
+	// Use this for initialization
+	void Start () {
+        Initialize();
+	}
+	
+	void Initialize() {
+        //way 1:
+        //get object first
+        CSVObject obj = CSVDatabase.GetObj(databaseID);
+        Name = obj.GetValue("name") as string;
+
+        //way 2:
+        Cost = (int) CSVDatabase.GetValue(databaseID, "cost");
+    }
+}
+
+
+```
+
+# Advices
+ * dont use capital letters, anywhere, this will avoid all kinds of errors.
+
+# Viewer
 CSVDatabaseLoader is also a viewer for database contents.
 Simply launch and see the contents in its inspector:
 ![](http://i.imgur.com/QXt8QXW.png)
