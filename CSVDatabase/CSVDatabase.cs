@@ -26,6 +26,23 @@ public class CSVObject {
         return val;
     }
 
+    public string GetString(string field) {
+        return (string)GetValue(field);
+    }
+
+    public int GetInt(string field) {
+        return (int)GetValue(field);
+    }
+
+    public float GetFloat(string field) {
+        return (float)GetValue(field);
+    }
+
+    public bool GetBool(string field) {
+        return (bool)GetValue(field);
+    }
+
+
     public event Action OnDataUpdate = delegate { };
 }
 
@@ -226,7 +243,7 @@ public static class CSVDatabase {
                 }
                 break;
             default:
-                result = "";
+                result = value.Length > 0 ? value : "";
                 break;
         }
         return result == null ? value : result;
