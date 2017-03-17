@@ -89,7 +89,9 @@ public static class CSVDatabase {
                             continue;
                         }
                         string objectDbName = line[0];
-                        string parent = line[1];
+                        string parent = "";
+                        if(!string.IsNullOrEmpty(line[1]))
+                            parent = line[1].Contains("/") ?  line[1] : tablePath + line[1];
 
                         CSVObject csvobj = new CSVObject(objectDbName, tablePath + objectDbName, parent);
 
@@ -102,7 +104,7 @@ public static class CSVDatabase {
                         for (int i = 3; i < line.Length; i++) {
                             csvobj.name_value.Add(fieldnames[i], ParseTo(line[i], fieldtypes[i], csvobj));
                         }
-                        database.Add(csvobj.name, csvobj);
+                        database.Add(csvobj.path, csvobj);
                     }
                 }
             }
