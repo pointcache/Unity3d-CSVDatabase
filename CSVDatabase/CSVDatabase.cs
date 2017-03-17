@@ -17,12 +17,16 @@ public class CSVObject {
     public Dictionary<string, object> name_value = new Dictionary<string, object>();
 
     public object GetValue(string field) {
+        if (field.Equals("name"))
+            return name;
         object val;
         name_value.TryGetValue(field, out val);
         if (val == null)
             Debug.LogError("CSVObject: such field was not found by the name:" + field);
         return val;
     }
+
+    public event Action OnDataUpdate = delegate { };
 }
 
 public static class CSVDatabase {
@@ -30,8 +34,9 @@ public static class CSVDatabase {
     static string rootPath = Application.dataPath + "/Data/CSV/";
     public static Dictionary<string, CSVObject> database;
 
-
     public static CSVObject GetObj(string path) {
+        if (database == null)
+            return null;
         CSVObject obj;
         database.TryGetValue(path, out obj);
         if (obj == null)
