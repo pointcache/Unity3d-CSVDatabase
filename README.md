@@ -23,4 +23,13 @@ the rest are arbitrary and you can add as much as you need.
 ## Sheet rules
 ![](http://i.imgur.com/7VBXYMm.png)
 
-* A1 - 
+* A1 - "table path", all the items inside this table (their names, or ID's) will inherit this "root path" so object "sword" will have a database path of "weapons/sword", each file has his own path.
+
+* second row defines Fields (value names):
+  * First three columns are reserved by the system and writing names there is not necessary
+  * Other columns are free to be used 
+  * add ":int" or other type (int, float, bool) to the end of the column name, to specify to which type to convert the value
+  
+* System columns:
+  * column A - Name : object name, or id, used to identify object and should be unique.
+  * column B - Parent : put other object's 
