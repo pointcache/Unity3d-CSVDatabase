@@ -90,8 +90,8 @@ public static class CSVDatabase {
                         }
                         string objectDbName = line[0];
                         string parent = "";
-                        if(!string.IsNullOrEmpty(line[1]))
-                            parent = line[1].Contains("/") ?  line[1] : tablePath + line[1];
+                        if (!string.IsNullOrEmpty(line[1]))
+                            parent = line[1].Contains("/") ? line[1] : tablePath + line[1];
 
                         CSVObject csvobj = new CSVObject(objectDbName, tablePath + objectDbName, parent);
 
@@ -184,9 +184,6 @@ public static class CSVDatabase {
     }
 
     static object ParseTo(string value, string type, CSVObject obj) {
-
-        if (String.IsNullOrEmpty(value))
-            return string.Empty;
         switch (value) {
             case "$name":
                 return obj.name;
@@ -199,16 +196,32 @@ public static class CSVDatabase {
         object result = null;
 
         switch (type) {
-            case "int":
-                result = Convert.ToInt16(value);
+            case "int": {
+                    int val;
+                    if (Int32.TryParse(value, out val))
+                        result = val;
+                    else
+                        result = 0;
+                }
                 break;
-            case "float":
-                result = Convert.ToSingle(value);
+            case "float": {
+                    float val;
+                    if (Single.TryParse(value, out val))
+                        result = Convert.ToSingle(value);
+                    else
+                        result = 0f;
+                }
                 break;
-            case "bool":
-                result = Convert.ToBoolean(value);
+            case "bool": {
+                    bool val;
+                    if (Boolean.TryParse(value, out val))
+                        result = Convert.ToBoolean(value);
+                    else
+                        result = false;
+                }
                 break;
             default:
+                result = "";
                 break;
         }
         return result == null ? value : result;
