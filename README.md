@@ -19,9 +19,16 @@ It scans a folder for CSV files, then parses them based on rules.
 Columns define "fields" or variable names. First three columns are internal and mandatory, 
 the rest are arbitrary and you can add as much as you need.
 
+# Installation
+Simply drop two files anywhere in your unity project.
+
+
 # Usage
 ## Sheet rules
 ![](http://i.imgur.com/7VBXYMm.png)
+
+Create a GameObject in the scene and add CSVDatabaseLoader to it.
+By default the database will look in "Data/CSV" folder for .csv files, that is hardcoded for now, but you can change it easy.
 
 * A1 - "table path", all the items inside this table (their names, or ID's) will inherit this "root path" so object "sword" will have a database path of "weapons/sword", each file has his own path.
 
@@ -32,4 +39,10 @@ the rest are arbitrary and you can add as much as you need.
   
 * System columns:
   * column A - Name : object name, or id, used to identify object and should be unique.
-  * column B - Parent : put other object's 
+  * column B - Parent : put other object's name - local if within the same file, or full path if in other file (armor/dragon_helmet)
+  * column C - Custom : reserved for future use, you will have a long line of arbitrary key:value separated by ';' unique for each object, just in case you need to shove a bunch of unique additionional data for whatever uses 
+  
+# Viewier
+CSVDatabaseLoader is also a viewer for database contents.
+Simply launch and see the contents in its inspector:
+![](http://i.imgur.com/QXt8QXW.png)
