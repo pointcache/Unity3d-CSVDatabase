@@ -46,10 +46,11 @@ By default the database will look in "Data/CSV" folder for .csv files, that is h
 * Inheritance - you can inherit any other object, that shares similar fields (not necessary tho, but will throw an error to notify you). You can inherit an object that inherits another object. Any field left empty in the csv will be inherited.
  
 # Keywords
-current keywords
-put them in fields
-$name - the name of the object 
-#path - the path of the object
+
+current keywords, put them in fields
+
+* $name - the name of the object 
+* $path - the path of the object
 
 # Code
 
