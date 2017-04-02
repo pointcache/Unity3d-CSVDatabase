@@ -80,6 +80,9 @@ public class TestScript : MonoBehaviour {
 
         //way 2:
         Cost = (int) CSVDatabase.GetValue(databaseID, "cost");
+	
+	//way 3:
+	Cost = obj.GetInt("cost");
     }
 }
 
